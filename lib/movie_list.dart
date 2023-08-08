@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'http_helper.dart';
 import 'movie.dart';
-import 'dart:core';// Import the Movie class
+import 'dart:core' ;
 
 class MovieList extends StatefulWidget {
   @override
@@ -10,14 +10,15 @@ class MovieList extends StatefulWidget {
 
 class _MovieListState extends State<MovieList> {
   int moviesCount = 0; // Initialize moviesCount
-  List<Movie> movies = []; // Initialize movies list with Movie type
+   late List<Movie> movies = [];
 
   Future<void> initialize() async {
-    movies = (await helper.getUpcoming())!;
+    movies = await helper.getUpcoming();
     setState(() {
       moviesCount = movies.length;
     });
   }
+
 
   HttpHelper helper = HttpHelper();
 
@@ -35,8 +36,8 @@ class _MovieListState extends State<MovieList> {
         itemCount: moviesCount,
         itemBuilder: (BuildContext context, int position) {
           return ListTile(
-            title: Text(movies[position].title),
             subtitle: Text(movies[position].releaseDate),
+            title: Text(movies[position].title),
             // Add more widgets to display other information
           );
         },

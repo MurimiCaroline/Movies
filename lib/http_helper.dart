@@ -9,7 +9,7 @@ class HttpHelper {
   final String urlUpcoming = '/upcoming?';
   final String urlLanguage = '&language=en-US';
 
-  Future<List<Movie>?> getUpcoming() async {
+  Future<List<Movie>> getUpcoming() async {
     final String upcoming = '$urlBase$urlUpcoming$urlKey$urlLanguage';
     http.Response result = await http.get(Uri.parse(upcoming));
     if (result.statusCode == HttpStatus.ok) {
@@ -18,7 +18,9 @@ class HttpHelper {
       List<Movie> movies = moviesMap.map((i) => Movie.fromJson(i)).toList();
       return movies;
     } else {
-      return null; // Return null in case of error
+      throw Exception('Failed to load upcoming movies');
     }
   }
+
 }
+

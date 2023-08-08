@@ -11,6 +11,7 @@ class Movie {
   String overview;
   String posterPath;
 
+
   Movie({
     required int id,
     required this.title,
